@@ -1,7 +1,7 @@
 /* Service worker: funciona sin internet y recibe actualizaciones de GitHub.
    Sube el numero de VERSION cada vez que cambies los archivos. */
-const VERSION = "codeforja-v1";
-const ARCHIVOS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon.svg"];
+const VERSION = "codeforja-v3";
+const ARCHIVOS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(ARCHIVOS)).then(() => self.skipWaiting()));
