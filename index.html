@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodeForja · Ventas de apps web</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#141A26">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CodeForja">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#EEF1F6;--card:#fff;--ink:#141A26;--mut:#5E6A7E;--line:#D9DFEA;--ac:#4C3FE0;--cu:#D9772B;--ok:#13875B;--bad:#C93A3A;--side:#141A26}
+@media(prefers-color-scheme:dark){:root{--bg:#0E121B;--card:#171D2A;--ink:#EAEEF6;--mut:#93A0B8;--line:#27304A;--ac:#8B80FF;--side:#0A0D14}}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 "Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+.app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+aside{background:var(--side);color:#fff;padding:18px 14px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:10px;align-items:center;margin-bottom:22px}.brand b{font-size:18px;letter-spacing:.3px}.brand small{display:block;color:#9AA6BD;font-size:11px}
+nav button{display:block;width:100%;text-align:left;background:none;border:0;color:#C9D2E3;padding:10px 12px;border-radius:10px;font:inherit;cursor:pointer;margin-bottom:4px}
+nav button.on,nav button:hover{background:rgba(255,255,255,.1);color:#fff}
+main{padding:22px;max-width:1100px;width:100%}
+h1{font-size:24px;margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.k{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}.k span{color:var(--mut);font-size:13px}.k b{display:block;font-size:24px;margin-top:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.card h2{font-size:16px;margin:0 0 12px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:150px}.bars div{flex:1;text-align:center;font-size:11px;color:var(--mut)}.bars i{display:block;background:linear-gradient(var(--ac),#7A6CFF);border-radius:6px 6px 0 0;min-height:3px;margin-bottom:4px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:720px}th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}th{color:var(--mut);font-weight:600;font-size:13px}
+.tag{padding:2px 9px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap}.t-ok{background:#13875B22;color:var(--ok)}.t-w{background:#D9772B26;color:var(--cu)}.t-b{background:#C93A3A22;color:var(--bad)}
+button.b,a.b{background:var(--ac);color:#fff;border:0;border-radius:9px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;display:inline-block}
+button.g{background:none;color:var(--ac);border:1px solid var(--line)}button.d{background:none;color:var(--bad);border:1px solid var(--line)}
+.row{display:flex;gap:6px;flex-wrap:wrap}.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit}
+label{font-size:13px;color:var(--mut);display:block}.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fg .w{grid-column:1/-1}
+dialog{border:0;border-radius:16px;padding:20px;width:min(520px,94vw);background:var(--card);color:var(--ink)}dialog::backdrop{background:#0008}
+.alert{background:#D9772B1F;border:1px solid var(--cu);border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.hide{display:none}
+@media(max-width:760px){.app{grid-template-columns:1fr}aside{position:static;height:auto;display:flex;gap:8px;align-items:center;overflow-x:auto}.brand{margin:0}nav{display:flex}nav button{white-space:nowrap}.fg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand">
+    <svg width="46" height="46" viewBox="0 0 100 100" aria-label="Logo CodeForja">
+      <defs>
+        <linearGradient id="m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4B27A"/><stop offset=".45" stop-color="#C9651F"/><stop offset="1" stop-color="#6E3009"/></linearGradient>
+        <linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2B3560"/><stop offset="1" stop-color="#0B0F1E"/></linearGradient>
+        <linearGradient id="h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <radialGradient id="g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8B80FF" stop-opacity=".9"/><stop offset="1" stop-color="#8B80FF" stop-opacity="0"/></radialGradient>
+        <filter id="s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-opacity=".5"/></filter>
+      </defs>
+      <g filter="url(#s)">
+        <polygon points="50,5 90,27 90,73 50,95 10,73 10,27" fill="url(#m)"/>
+        <polygon points="50,12 83,31 83,69 50,88 17,69 17,31" fill="url(#f)"/>
+        <polygon points="50,5 90,27 50,48 10,27" fill="url(#h)" opacity=".45"/>
+      </g>
+      <circle cx="50" cy="50" r="30" fill="url(#g)"/>
+      <path d="M40 36 28 50 40 64M60 36 72 50 60 64" fill="none" stroke="#F4B27A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M54 34 46 66" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <div><b id="bn">CodeForja</b><small>Ventas de apps web</small></div>
+  </div>
+  <nav>
+    <button data-v="dash" class="on">Panel</button>
+    <button data-v="ventas">Ventas</button>
+    <button data-v="avisos">Avisos de garantía</button>
+    <button data-v="ajustes">Ajustes y datos</button>
+  </nav>
+</aside>
+<main>
+  <div id="inst" class="alert hide"><b>Instala la app</b> en este dispositivo para usarla sin internet. <button class="b" id="instBtn" style="margin-left:8px">Instalar</button> <button class="b g" onclick="$('#inst').classList.add('hide')">Ahora no</button></div>
+  <div id="ios" class="alert hide">En iPhone o iPad: toca Compartir y luego “Agregar a pantalla de inicio”.</div>
+  <section id="dash"></section>
+  <section id="ventas" class="hide"></section>
+  <section id="avisos" class="hide"></section>
+  <section id="ajustes" class="hide"></section>
+</main>
+</div>
+
+<dialog id="dlg"><form method="dialog" id="frm"></form></dialog>
+<dialog id="rec"><div id="recbox"></div></dialog>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cop=n=>"$"+Math.round(+n||0).toLocaleString("es-CO");
+const KEY="codeforja.v1";
+let S={cfg:{negocio:"CodeForja",whatsapp:"",cuota:50000,alerta:15},ventas:[]};
+function guardar(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+async function cargar(){
+  let ok=false;
+  try{const t=localStorage.getItem(KEY);if(t){S=JSON.parse(t);ok=true}}catch(e){}
+  if(!ok){try{const r=await fetch("data.json");if(r.ok){S=await r.json();guardar()}}catch(e){}}
+  render();
+}
+const addM=(f,m)=>{const d=new Date(f+"T12:00:00");d.setMonth(d.getMonth()+(+m||0));return d};
+const fin=v=>addM(v.fecha,v.meses);
+const dias=v=>Math.ceil((fin(v)-new Date())/864e5);
+const estado=v=>{const d=dias(v);return d<0?["Vencida","t-b"]:d<=S.cfg.alerta?["Por vencer","t-w"]:["Activa","t-ok"]};
+const fmtD=d=>d.toLocaleDateString("es-CO",{day:"2-digit",month:"short",year:"numeric"});
+
+function render(){
+  $("#bn").textContent=S.cfg.negocio||"CodeForja";
+  const V=S.ventas,tot=V.reduce((a,v)=>a+ +v.precio,0),pag=V.reduce((a,v)=>a+ +v.pagado,0);
+  const por=V.filter(v=>estado(v)[0]=="Por vencer"),ven=V.filter(v=>estado(v)[0]=="Vencida");
+  const meses={};V.forEach(v=>{const k=v.fecha.slice(0,7);meses[k]=(meses[k]||0)+ +v.pagado});
+  const ks=Object.keys(meses).sort().slice(-6),mx=Math.max(1,...ks.map(k=>meses[k]));
+  $("#dash").innerHTML=`<h1>Panel</h1>
+  ${por.length+ven.length?`<div class="alert"><b>${por.length}</b> garantía(s) por vencer y <b>${ven.length}</b> vencida(s). Avisa a tus clientes desde “Avisos de garantía”.</div>`:""}
+  <div class="kpis">
+   <div class="k"><span>Apps vendidas</span><b>${V.length}</b></div>
+   <div class="k"><span>Ventas totales</span><b>${cop(tot)}</b></div>
+   <div class="k"><span>Cobrado</span><b>${cop(pag)}</b></div>
+   <div class="k"><span>Por cobrar</span><b style="color:var(--cu)">${cop(tot-pag)}</b></div>
+   <div class="k"><span>Garantías activas</span><b>${V.filter(v=>dias(v)>=0).length}</b></div></div>
+  <div class="card"><h2>Cobrado por mes</h2>${ks.length?`<div class="bars">${ks.map(k=>`<div><i style="height:${meses[k]/mx*110}px"></i>${k.slice(5)}/${k.slice(2,4)}<br>${cop(meses[k]/1000)}k</div>`).join("")}</div>`:"<p>Aún no hay ventas. Registra la primera en “Ventas”.</p>"}</div>`;
+
+  $("#ventas").innerHTML=`<h1>Ventas</h1><div class="bar"><button class="b" onclick="editar()">+ Nueva venta</button><input id="q" placeholder="Buscar cliente o app" style="max-width:260px" oninput="filtrar()"></div>
+  <div class="card tw"><table><thead><tr><th>Cliente</th><th>App</th><th>Precio</th><th>Saldo</th><th>Garantía hasta</th><th>Estado</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>`;
+  filtrar();
+
+  const alertas=[...por,...ven].sort((a,b)=>dias(a)-dias(b));
+  $("#avisos").innerHTML=`<h1>Avisos de garantía</h1><p style="color:var(--mut)">Clientes con garantía por vencer (${S.cfg.alerta} días) o vencida. El mensaje anuncia que desde esa fecha se cobran las próximas mejoras (${cop(S.cfg.cuota)}).</p>
+  <div class="card tw"><table><thead><tr><th>Cliente</th><th>App</th><th>Vence</th><th>Días</th><th></th></tr></thead><tbody>${alertas.map(v=>`<tr><td>${esc(v.cliente)}</td><td>${esc(v.app)}</td><td>${fmtD(fin(v))}</td><td><span class="tag ${estado(v)[1]}">${dias(v)}</span></td><td><button class="b" onclick="avisar('${v.id}')">Avisar por WhatsApp</button></td></tr>`).join("")||`<tr><td colspan="5">Nada por avisar. Todo al día.</td></tr>`}</tbody></table></div>`;
+
+  const c=S.cfg;
+  $("#ajustes").innerHTML=`<h1>Ajustes y datos</h1><div class="card"><div class="fg">
+  <div><label>Nombre del negocio</label><input id="c1" value="${esc(c.negocio)}"></div>
+  <div><label>Tu WhatsApp (con indicativo, ej. 573001234567)</label><input id="c2" value="${esc(c.whatsapp)}"></div>
+  <div><label>Cobro por mejoras futuras (COP)</label><input id="c3" type="number" value="${c.cuota}"></div>
+  <div><label>Avisar con X días de anticipación</label><input id="c4" type="number" value="${c.alerta}"></div></div>
+  <p><button class="b" onclick="saveCfg()">Guardar ajustes</button></p></div>
+  <div class="card"><h2>Datos para GitHub</h2><p style="color:var(--mut)">Descarga <b>data.json</b> y súbelo al repositorio junto a index.html. Al abrir la app, si el navegador no tiene datos, los carga de ese archivo. Para actualizar la app, solo reemplaza index.html en GitHub: tus datos no se pierden.</p>
+  <div class="row"><button class="b" onclick="exportar()">Descargar data.json</button><button class="b g" onclick="$('#imp').click()">Importar data.json</button><input id="imp" type="file" accept=".json" class="hide" onchange="importar(this)"></div></div>`;
+}
+function filtrar(){
+  const q=($("#q")?.value||"").toLowerCase();
+  $("#tb").innerHTML=S.ventas.filter(v=>(v.cliente+v.app).toLowerCase().includes(q)).sort((a,b)=>b.fecha.localeCompare(a.fecha)).map(v=>{const e=estado(v);return `<tr><td>${esc(v.cliente)}</td><td>${esc(v.app)}</td><td>${cop(v.precio)}</td><td>${cop(v.precio-v.pagado)}</td><td>${fmtD(fin(v))}</td><td><span class="tag ${e[1]}">${e[0]}</span></td><td><div class="row"><button class="b" onclick="recibo('${v.id}')">Recibo</button><button class="b g" onclick="editar('${v.id}')">Editar</button><button class="b d" onclick="borrar('${v.id}')">Borrar</button></div></td></tr>`}).join("")||`<tr><td colspan="7">Sin ventas todavía.</td></tr>`;
+}
+function editar(id){
+  const v=S.ventas.find(x=>x.id==id)||{cliente:"",tel:"",app:"",precio:"",pagado:0,fecha:new Date().toISOString().slice(0,10),meses:3,nota:""};
+  $("#frm").innerHTML=`<h2 style="margin-top:0">${id?"Editar venta":"Nueva venta"}</h2><div class="fg">
+  <div><label>Cliente</label><input id="f1" value="${esc(v.cliente)}"></div><div><label>Celular</label><input id="f2" value="${esc(v.tel)}"></div>
+  <div class="w"><label>Aplicación vendida</label><input id="f3" value="${esc(v.app)}"></div>
+  <div><label>Precio (COP)</label><input id="f4" type="number" value="${v.precio}"></div><div><label>Pagado (COP)</label><input id="f5" type="number" value="${v.pagado}"></div>
+  <div><label>Fecha de venta</label><input id="f6" type="date" value="${v.fecha}"></div><div><label>Garantía y soporte (meses)</label><input id="f7" type="number" value="${v.meses}"></div>
+  <div class="w"><label>Nota</label><input id="f8" value="${esc(v.nota)}"></div></div>
+  <p class="row"><button type="button" class="b" onclick="guardarVenta('${id||""}')">Guardar</button><button type="button" class="b g" onclick="$('#dlg').close()">Cancelar</button></p>`;
+  $("#dlg").showModal();
+}
+function guardarVenta(id){
+  const n={id:id||String(Date.now()),cliente:$("#f1").value.trim(),tel:$("#f2").value.trim(),app:$("#f3").value.trim(),precio:+$("#f4").value||0,pagado:+$("#f5").value||0,fecha:$("#f6").value,meses:+$("#f7").value||0,nota:$("#f8").value.trim()};
+  if(!n.cliente||!n.app||!n.fecha){alert("Escribe cliente, aplicación y fecha.");return}
+  const i=S.ventas.findIndex(x=>x.id==id);i>=0?S.ventas[i]=n:S.ventas.push(n);
+  guardar();$("#dlg").close();render();
+}
+function borrar(id){if(confirm("¿Borrar esta venta?")){S.ventas=S.ventas.filter(v=>v.id!=id);guardar();render()}}
+function saveCfg(){S.cfg={negocio:$("#c1").value||"CodeForja",whatsapp:$("#c2").value.replace(/\D/g,""),cuota:+$("#c3").value||0,alerta:+$("#c4").value||15};guardar();render();alert("Ajustes guardados")}
+function exportar(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,2)],{type:"application/json"}));a.download="data.json";a.click()}
+function importar(i){const f=i.files[0];if(!f)return;f.text().then(t=>{try{S=JSON.parse(t);guardar();render();alert("Datos importados")}catch(e){alert("El archivo no es válido")}})}
+function numWA(t){let d=String(t).replace(/\D/g,"");return d.length==10?"57"+d:d}
+function avisar(id){
+  const v=S.ventas.find(x=>x.id==id),d=dias(v);
+  const m=`Hola ${v.cliente}, te escribe ${S.cfg.negocio}. La garantía y el soporte de tu app “${v.app}” ${d<0?"venció":"vence"} el ${fmtD(fin(v))}${d>=0?` (faltan ${d} días)`:""}. Desde esa fecha las próximas mejoras y ajustes tienen un valor de ${cop(S.cfg.cuota)}. ¿Quieres renovar tu soporte? Estamos para servirte.`;
+  window.open("https://wa.me/"+numWA(v.tel)+"?text="+encodeURIComponent(m),"_blank");
+}
+/* Recibo estilo Nequi: se dibuja como imagen y se comparte */
+let CV=null;
+function recibo(id){
+  const v=S.ventas.find(x=>x.id==id),c=document.createElement("canvas");c.width=720;c.height=1080;const x=c.getContext("2d");
+  const g=x.createLinearGradient(0,0,720,1080);g.addColorStop(0,"#2A0A4A");g.addColorStop(1,"#7A1FA2");x.fillStyle=g;x.fillRect(0,0,720,1080);
+  x.fillStyle="#fff";x.font="bold 40px Segoe UI,Arial";x.textAlign="center";x.fillText(S.cfg.negocio,360,90);
+  x.font="26px Segoe UI,Arial";x.fillStyle="#E9D3FA";x.fillText("¡Listo! Tu pago quedó registrado",360,140);
+  x.fillStyle="#fff";x.beginPath();x.roundRect(40,180,640,820,28);x.fill();
+  x.fillStyle="#13875B";x.beginPath();x.arc(360,250,38,0,7);x.fill();x.strokeStyle="#fff";x.lineWidth=8;x.lineCap="round";x.beginPath();x.moveTo(342,250);x.lineTo(356,264);x.lineTo(380,236);x.stroke();
+  x.textAlign="center";x.fillStyle="#6B7280";x.font="24px Segoe UI,Arial";x.fillText("Valor pagado",360,340);
+  x.fillStyle="#200020";x.font="bold 64px Segoe UI,Arial";x.fillText(cop(v.pagado),360,410);
+  const f=[["Cliente",v.cliente],["Aplicación",v.app],["Precio total",cop(v.precio)],["Saldo pendiente",cop(v.precio-v.pagado)],["Fecha",fmtD(new Date(v.fecha+"T12:00:00"))],["Garantía hasta",fmtD(fin(v))],["Referencia","M"+String(v.id).slice(-8)]];
+  x.textAlign="left";let y=480;
+  f.forEach(r=>{x.fillStyle="#6B7280";x.font="22px Segoe UI,Arial";x.fillText(r[0],80,y);x.fillStyle="#200020";x.font="bold 24px Segoe UI,Arial";x.textAlign="right";x.fillText(String(r[1]).slice(0,28),640,y);x.textAlign="left";x.strokeStyle="#EEE";x.lineWidth=2;x.beginPath();x.moveTo(80,y+18);x.lineTo(640,y+18);x.stroke();y+=70});
+  x.textAlign="center";x.fillStyle="#9CA3AF";x.font="20px Segoe UI,Arial";x.fillText("Gracias por confiar en "+S.cfg.negocio,360,1040);
+  CV=c;
+  $("#recbox").innerHTML=`<img src="${c.toDataURL()}" style="width:100%;border-radius:12px"><p class="row"><button class="b" onclick="compartir('${v.cliente.replace(/'/g,"")}')">Compartir recibo</button><button class="b g" onclick="descargar()">Descargar</button><button class="b g" onclick="$('#rec').close()">Cerrar</button></p>`;
+  $("#rec").showModal();
+}
+function descargar(){const a=document.createElement("a");a.href=CV.toDataURL();a.download="recibo.png";a.click()}
+function compartir(n){
+  CV.toBlob(async b=>{
+    const f=new File([b],"recibo.png",{type:"image/png"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:"Recibo de pago",text:"Recibo de "+n})}catch(e){}}
+    else{descargar();alert("Tu navegador no comparte imágenes directo. Se descargó el recibo para enviarlo.")}
+  });
+}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x==b));
+  ["dash","ventas","avisos","ajustes"].forEach(s=>$("#"+s).classList.toggle("hide",s!=b.dataset.v));
+});
+cargar();
+/* Instalable (PWA) y modo sin internet */
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+let ev=null;
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();ev=e;$("#inst").classList.remove("hide")});
+$("#instBtn").onclick=async()=>{if(!ev)return;ev.prompt();await ev.userChoice;ev=null;$("#inst").classList.add("hide")};
+addEventListener("appinstalled",()=>$("#inst").classList.add("hide"));
+if(/iphone|ipad/i.test(navigator.userAgent)&&!navigator.standalone)$("#ios").classList.remove("hide");
+</script>
+</body>
+</html>

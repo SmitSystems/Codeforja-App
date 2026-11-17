@@ -1,0 +1,17 @@
+{
+  "name": "CodeForja · Ventas de apps web",
+  "short_name": "CodeForja",
+  "description": "Ventas de aplicaciones web: panel, recibos y avisos de garantía.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0A0D14",
+  "theme_color": "#141A26",
+  "lang": "es",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
